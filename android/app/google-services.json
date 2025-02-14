@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "50297548634",
+    "project_id": "otpp-edb0c",
+    "storage_bucket": "otpp-edb0c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:50297548634:android:474551e878b13535fe8d63",
+        "android_client_info": {
+          "package_name": "com.abc.abc.otp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "50297548634-7vrj2bckcctsqu92r9ighm5ikkq4g3ad.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAN4D6pWiejlsfI4dajp_x3TrBPwDQY378"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "50297548634-7vrj2bckcctsqu92r9ighm5ikkq4g3ad.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "50297548634-0lt8dd8olde7v0eufhbpilhtj17jtgpg.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.abc.abc.otp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
