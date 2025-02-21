@@ -1,31 +1,71 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+import 'package:otpp/fire/splashscreen.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'firebase_options.dart';
 
-
-import 'emailauth/auth/login_screen.dart';
-import 'hi.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  runApp(App());
+  await Firebase.initializeApp(options:DefaultFirebaseOptions.currentPlatform);
+  runApp(
+      ChangeNotifierProvider(
+      create: (context)=>ThemeProvider(),
+      child:
+      App()
+  )
+  );
 }
-class App extends StatelessWidget {
+class App extends StatefulWidget {
   const App({Key? key}) : super(key: key);
+
+  @override
+  State<App> createState() => _AppState();
+}
+
+class _AppState extends State<App> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    Provider.of<ThemeProvider>(context,listen: false).load();
+    super.initState();
+  }
+
+
   @override
   Widget build(BuildContext context) {
+    var themeProvider = Provider.of<ThemeProvider>(context);
+
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(title: const Text("Login"),),
-        body: const LoginScreen()
-        //MyApp(),
-      ),
+      debugShowCheckedModeBanner: false,
+      theme: themeProvider.isDarkModeCheck
+          ? ThemeData.dark(useMaterial3: true)
+          :ThemeData.light(useMaterial3: true),
+      // routes: {
+      //   '/add':(context)
+      //   {
+      //     return MyApp();
+      //   },
+      //   '/add':(context)
+      //   {
+      //     return ad();
+      //   },
+      //
+      //
+      // },
+      // initialRoute: '/add',
+      home:
+      //Mainscreen(),
+      SplashScreen()
+
+
     );
   }
 }
+/*
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
   @override
@@ -75,8 +115,9 @@ class _MyAppState extends State<MyApp> {
   var numController = TextEditingController();
   FirebaseAuth auth = FirebaseAuth.instance;
   String verificationId = "";
-  void signInWithPhoneAuthCredential(
-      PhoneAuthCredential phoneAuthCredential) async {
+
+
+  void signInWithPhoneAuthCredential(PhoneAuthCredential phoneAuthCredential) async {
     try {
       final authCredential =
       await auth.signInWithCredential(phoneAuthCredential);
@@ -88,6 +129,9 @@ class _MyAppState extends State<MyApp> {
       print("catch");
     }
   }
+
+
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -158,3 +202,65 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
+*/
+
+
+class ThemeProvider extends ChangeNotifier {
+
+  bool isDarkModeCheck = true;
+
+   updateTheme({required bool dark}) async
+  {
+    isDarkModeCheck = dark;
+    notifyListeners();
+
+
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('isDarkModeCheck', isDarkModeCheck);
+  }
+
+
+
+
+  load() async
+  {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    isDarkModeCheck =  prefs.getBool('isDarkModeCheck',) ?? true;
+
+    notifyListeners();
+  }
+
+
+
+}
+
+/*
+
+class sett extends StatefulWidget {
+  const sett({super.key});
+
+  @override
+  State<sett> createState() => _settState();
+}
+
+class _settState extends State<sett> {
+  @override
+  Widget build(BuildContext context) {
+
+    var themeProvider = Provider.of<ThemeProvider>(context);
+
+    return Scaffold(
+      appBar: AppBar(
+        actions: [
+          Switch(
+              value: themeProvider.isDarkModeCheck,
+              onChanged: (value)
+              {
+                themeProvider.updateTheme(dark: value);
+              }),
+        ],
+      ),
+    );
+  }
+}
+*/
