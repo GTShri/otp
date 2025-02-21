@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 
 class Viewscreen extends StatefulWidget {
   String CName;
-  int phone;
+  String phone;
   String email;
   String meeting;
   String Notes;
@@ -31,21 +31,18 @@ class _ViewscreenState extends State<Viewscreen> {
 
 
 
-  Future<void> delete() async
+  Future<void> listDelete() async
   {
     Navigator.pop(context);
-    try
-    {
-
+    try{
       Response response = await Dio().delete("https://fir-d29ca-default-rtdb.firebaseio.com/bucklist/${widget.index}.json");
-
       Navigator.pop(context,"refresh");
     }catch(e)
     {
       print(e);
     }
-
   }
+
   Future<void> markListcomplete() async
   {
     try
@@ -108,7 +105,7 @@ class _ViewscreenState extends State<Viewscreen> {
                       InkWell(
                           onTap:()
                           {
-                            delete();
+                            listDelete();
                           },
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
@@ -150,11 +147,11 @@ class _ViewscreenState extends State<Viewscreen> {
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text('Company Name: '+widget.CName ?? 'null'),
+                child: Text('Company Name: '+widget.CName),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text('Email ID: '+widget.email ?? 'null'),
+                child: Text('Email ID: '+widget.email),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -166,7 +163,7 @@ class _ViewscreenState extends State<Viewscreen> {
                     borderRadius: BorderRadius.circular(20),
                     image: DecorationImage(
                         fit: BoxFit.contain,
-                        image: NetworkImage(widget.image ?? 'null')
+                        image: NetworkImage(widget.image)
                     ),
                   ),
                 ),
@@ -177,7 +174,7 @@ class _ViewscreenState extends State<Viewscreen> {
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text(widget.Notes ?? 'null'),
+                child: Text(widget.Notes ),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -185,7 +182,7 @@ class _ViewscreenState extends State<Viewscreen> {
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text(widget.meeting?? 'null'),
+                child: Text(widget.meeting),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -193,7 +190,7 @@ class _ViewscreenState extends State<Viewscreen> {
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text('+91 '+widget.phone.toString() ?? 'null'),
+                child: Text('+91 '+widget.phone),
               ),
 
 

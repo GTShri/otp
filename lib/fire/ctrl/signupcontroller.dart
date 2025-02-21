@@ -4,7 +4,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import '../dashboard.dart';
+import '../crmscreens/MainScreen.dart';
+
 
 class SignUpCtrl{
 
@@ -23,7 +24,7 @@ class SignUpCtrl{
       );
 
       Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
-          builder: (context)=>Dashboard()),(route)
+          builder: (context)=>Mainscreen()),(route)
       {
         return false;
       });

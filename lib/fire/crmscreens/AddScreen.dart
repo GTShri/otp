@@ -39,7 +39,6 @@ class _AddscreenState extends State<Addscreen> {
         "meeting": meeting.text,
         "Notes": Notes.text,
         "image":image.text,
-
         "completed":false
       };
 
@@ -210,7 +209,7 @@ class _AddscreenState extends State<Addscreen> {
                     return 'Please enter valid Image URL';
                   }
                   return null;
-                },
+                 },
               ),
             ),
             Row(

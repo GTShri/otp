@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:otpp/fire/Signup.dart';
 import 'package:otpp/fire/ctrl/loginController.dart';
-import 'package:otpp/fire/ctrl/signupcontroller.dart';
 
-import 'dashboard.dart';
+
+import 'crmscreens/MainScreen.dart';
+
 
 class LogIn extends StatefulWidget {
   const LogIn({super.key});
@@ -44,7 +45,7 @@ class _LogInState extends State<LogIn> {
       if (user != null) {
 
         Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
-            builder: (context)=>Dashboard()),(route)
+            builder: (context)=>Mainscreen()),(route)
         {
           return false;
         });
